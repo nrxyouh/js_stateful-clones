@@ -17,7 +17,6 @@ function transformStateWithClones(state, actions) {
     switch (action.type) {
       case 'clear':
         stateCopy = {};
-        Object.assign(stateCopy, action.extraData);
         break;
 
       case 'addProperties':
@@ -29,6 +28,9 @@ function transformStateWithClones(state, actions) {
           delete stateCopy[action.keysToRemove[k]];
         }
         break;
+
+      default:
+        throw new Error(`Unknown action type: ${action.type}`);
     }
 
     results.push(stateCopy);
